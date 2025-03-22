@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App: React.FC = () => {
   return (
@@ -15,12 +16,20 @@ const App: React.FC = () => {
         <Header />
         <main className="flex-grow container mx-auto p-4">
           <Routes>
+            <Route path="/" element={<Apartments />} />
             <Route path="/apartments" element={<Apartments />} />
             <Route path="/building/:id" element={<BuildingDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
         <Footer />
